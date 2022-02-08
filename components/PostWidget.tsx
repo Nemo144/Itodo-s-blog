@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import moment from 'moment'
 import Link from 'next/link'
 import { getRecentPosts, getSimilarPosts } from '../services'
-import { DefaultDeserializer } from 'v8'
 import { Categories } from '.'
 
 const PostWidget = ({ categories, slug }: any) => {
@@ -10,7 +9,9 @@ const PostWidget = ({ categories, slug }: any) => {
 
   useEffect(() => {
     if (slug) {
-      getSimilarPosts().then((result) => setRelatedPosts(result))
+      getSimilarPosts(categories, slug).then((result) =>
+        setRelatedPosts(result)
+      )
     } else {
       getRecentPosts().then((result) => setRelatedPosts(result))
     }
