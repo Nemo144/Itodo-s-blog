@@ -10,6 +10,11 @@ const CommentsForm = ({ slug }: any) => {
   const emailEl = useRef()
   const storeDataEl = useRef()
 
+  useEffect(() => {
+    nameEl.current.value = window.localStorage.getItem('name')
+    emailEl.current.value = window.localStorage.getItem('email')
+  }, [])
+
   // const handleCommentSubmission = () => {
   //   setError(false)
 
@@ -21,6 +26,22 @@ const CommentsForm = ({ slug }: any) => {
   //     setError(true)
   //     return
   //   }
+  //   const commentObj = { name, email, comment, slug }
+
+  //   if (storeData) {
+  //     localStorage.setItem('name', name)
+  //     localStorage.setItem('email', email)
+  //   } else {
+  //     localStorage.removeItem('name', name)
+  //     localStorage.removeItem('name', name)
+  //   }
+  //   submitComment(commentObj).then(() => {
+  //     setShowSuccessMessage(true);
+
+  //     setTimeout(() => {
+  //       setShowSuccessMessage(true)
+  //     }, 3000)
+  //   })
   // }
 
   function handleCommentSubmission() {
@@ -38,17 +59,26 @@ const CommentsForm = ({ slug }: any) => {
     const commentObj = { name, email, comment, slug }
 
     if (storeData) {
-      localStorage.setItem('name', name)
-      localStorage.setItem('email', email)
+      window.localStorage.setItem('name', name)
+      window.localStorage.setItem('email', email)
     } else {
-      localStorage.removeItem('name', name)
-      localStorage.removeItem('name', name)
+      window.localStorage.removeItem('name')
+      window.localStorage.removeItem('email')
     }
+    submitComment(commentObj).then(() => {
+      setShowSuccessMessage(true)
+
+      setTimeout(() => {
+        setShowSuccessMessage(true)
+      }, 3000)
+    })
   }
 
   return (
     <div className="mb-8 rounded-lg bg-white p-8 pb-12 shadow-lg ">
-      <h3 className="mb-8 border-b pb-4 text-xl font-semibold">CommentsForm</h3>
+      <h3 className="mb-8 border-b pb-4 text-xl font-semibold">
+        Leave a reply
+      </h3>
       <div className="mb-4 grid grid-cols-1 gap-4">
         <textarea
           ref={commentEl}
