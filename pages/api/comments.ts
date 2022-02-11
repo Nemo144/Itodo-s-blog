@@ -14,7 +14,10 @@ const graphcmsToken =
 //   name: string
 // }
 
-export default async function comments(req: any, res: any) {
+export default async function comments(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   console.log({ graphcmsToken })
   const graphQLClient = new GraphQLClient(graphqlAPI, {
     headers: {

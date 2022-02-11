@@ -1,18 +1,18 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef, Ref } from 'react'
 import { submitComment } from '../services'
 
 const CommentsForm = ({ slug }: any) => {
   const [error, setError] = useState(false)
   const [localStorage, setLocalStorage] = useState(null)
   const [showSuccessMessage, setShowSuccessMessage] = useState(false)
-  const commentEl = useRef()
-  const nameEl = useRef()
-  const emailEl = useRef()
-  const storeDataEl = useRef()
+  const commentEl = useRef<HTMLTextAreaElement>(null)
+  const nameEl = useRef<HTMLInputElement>(null as unknown as HTMLInputElement)
+  const emailEl = useRef<HTMLInputElement>(null as unknown as HTMLInputElement)
+  const storeDataEl = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
-    nameEl.current.value = window.localStorage.getItem('name')
-    emailEl.current.value = window.localStorage.getItem('email')
+    nameEl.current.value = window.localStorage.getItem('name') as string
+    emailEl.current.value = window.localStorage.getItem('email') as string
   }, [])
 
   // const handleCommentSubmission = () => {
